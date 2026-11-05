@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+.env
+.env.*
+data/processed/
+data/bar_preserved/
+.notebook-rebuild-*/
+.test-*/
