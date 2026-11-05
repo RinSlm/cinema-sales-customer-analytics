@@ -1,0 +1,80 @@
+{
+  "verification_scope": "Six supplied raw CSV exports, read locally; no live-database query",
+  "source_rows": {
+    "schedule": 1963,
+    "films_payments": 9643,
+    "films": 53,
+    "clients": 9573,
+    "dict_cinema_rooms": 9,
+    "bar_payments": 16875
+  },
+  "naive_pay_at_timezone_assumption": "Europe/Moscow",
+  "output_timezone": "Europe/Moscow (timestamps written without timezone suffix)",
+  "checks_passed": [
+    "Required columns and non-null values",
+    "Unique schedule and dimension keys",
+    "All ticket references matched many-to-one",
+    "Positive seat capacities and valid price/discount ranges",
+    "Sold tickets do not exceed capacity",
+    "Every scheduled session retained",
+    "Ticket count/revenue reconcile across ticket, session and client tables",
+    "Exact four-column bar cleaning matches the selected notebook policy",
+    "Bar retained revenue plus removed revenue reconciles to raw revenue"
+  ],
+  "schedule_sessions": 1963,
+  "sessions_without_sales": 0,
+  "ticket_rows": 9643,
+  "ticket_revenue": 2876035.0,
+  "identical_ticket_rows_preserved": 0,
+  "unknown_channel_ticket_rows": 0,
+  "ticket_customers": 9573,
+  "bar": {
+    "duplicate_policy": "exact",
+    "duplicate_key": [
+      "client_id",
+      "pay_at",
+      "name",
+      "price"
+    ],
+    "source_item_rows": 16875,
+    "exact_duplicate_rows_in_source": 1934,
+    "retained_item_rows": 14941,
+    "removed_item_rows": 1934,
+    "removed_bar_revenue": 393194.0,
+    "raw_item_rows_preserved": 14941,
+    "identical_rows_preserved": 0,
+    "all_raw_bar_revenue": 3786431.0,
+    "bar_revenue_after_cleaning": 3393237.0,
+    "bar_revenue_of_ticket_customers": 3393237.0,
+    "bar_revenue_outside_ticket_customer_base": 0.0,
+    "bar_rows_outside_ticket_customer_base": 0,
+    "bar_customers_not_in_client_master": 0,
+    "first_bar_payment": "2024-03-01 11:58:26",
+    "last_bar_payment": "2024-07-31 22:53:59"
+  },
+  "dates": {
+    "first_scheduled_session": "2024-03-01",
+    "last_scheduled_session": "2024-07-31",
+    "first_ticket_payment": "2024-02-13 22:51:08",
+    "last_ticket_payment": "2024-07-31 22:28:18"
+  },
+  "remaining_assumptions": [
+    "Each films_payments row is one sold ticket; identical rows are not deleted",
+    "A purchased session is not verified attendance",
+    "Film price and client discount reflect the transaction-time values; history is unavailable",
+    "Exact bar duplicates removed by the declared Project_v2 notebook rule; technical duplication is not independently established",
+    "Bar rows are item records; order counts and average receipt are not claimed",
+    "Bar has no cinema/session key: no allocation to a cinema, film or individual visit is performed",
+    "Combined customer revenue covers supplied bar exports and ticket customers only; bar and ticket windows may differ",
+    "Observed client frequency does not establish new-customer status or retention probability"
+  ],
+  "datalens_compatibility_aliases": {
+    "client_metrics_datalens.csv": {
+      "bar_orders_count": "Legacy alias of bar_item_rows_count; counts item rows, NOT orders",
+      "bar_avg_check": "Legacy alias of bar_avg_item_price; mean item price, NOT average receipt"
+    },
+    "session_metrics_datalens.csv": {
+      "session_date": "YYYY-MM-DD calendar-date string, matching the prior CSV source schema"
+    }
+  }
+}
