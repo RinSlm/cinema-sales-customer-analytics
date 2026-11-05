@@ -1,0 +1,10 @@
+cinema_id,cinema_room_id,count_seats,is_vip,is_3d
+AC1,1,20,false,true
+AC1,2,28,false,false
+AC2,1,12,true,false
+AC2,2,36,false,true
+AC2,3,20,false,false
+AC2,4,36,false,false
+AC3,1,12,true,false
+AC3,2,20,false,false
+AC3,3,28,false,true
